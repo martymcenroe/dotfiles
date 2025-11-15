@@ -70,6 +70,21 @@ find . -type f \( -name "*.html" -o -name "*.md" \) -not -path "./.git/*" | whil
   fi
 done
 
+# --- For SQL files (.sql) ---
+find . -type f -name "*.sql" -not -path "./.git/*" | while read -r file; do
+  COMMENT_NOTICE="-- $COPYRIGHT_NOTICE"
+  # Use 'grep -q' (quiet) to check if the notice already exists
+  if ! grep -q "$COPYRIGHT_NOTICE" "$file"; then
+    echo "Adding copyright to: $file"
+    # 'sed -i 1i' inserts the text at line 1
+    sed -i "1i$COMMENT_NOTICE\n" "$file"
+    git add "$file"
+    git commit -m "style(license): add copyright header to $file"
+  else
+    echo "Skipping (already present): $file"
+  fi
+done
+
 # --- 4. Final Push ---
 echo "--- Pushing all new commits ---"
 git push
