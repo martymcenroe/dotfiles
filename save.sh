@@ -22,14 +22,14 @@ BASH_PROFILE_DEST="$SCRIPT_DIR/home/.bash_profile"
 
 # Windows Terminal settings
 WT_SETTINGS_SRC="$USERPROFILE/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
-WT_SETTINGS_DEST="$SCRIPT_DIR/windows/terminal/settings.json"
+WT_SETTINGS_DEST_DIR="$SCRIPT_DIR/windows/terminal"
+WT_SETTINGS_DEST_FILE="$WT_SETTINGS_DEST_DIR/settings.json"
 
 
 # --- 3. Copy Configs INTO Repo ---
 # We use 'cp -v' (verbose) to see what's happening.
 
 echo "Saving .bash_profile..."
-# --- FIX ---
 # We MUST check if the file exists before trying to copy it.
 if [ -f "$BASH_PROFILE_SRC" ]; then
   cp -v "$BASH_PROFILE_SRC" "$BASH_PROFILE_DEST"
@@ -42,7 +42,10 @@ fi
 echo "Saving Windows Terminal settings..."
 # Check if the live file exists before trying to copy
 if [ -f "$WT_SETTINGS_SRC" ]; then
-  cp -v "$WT_SETTINGS_SRC" "$WT_SETTINGS_DEST"
+  # --- FIX ---
+  # We MUST ensure the destination directory exists *before* copying.
+  mkdir -p "$WT_SETTINGS_DEST_DIR"
+  cp -v "$WT_SETTINGS_SRC" "$WT_SETTINGS_DEST_FILE"
 else
   echo "Info: Live settings.json not found, skipping."
   echo "      (This is normal if Windows Terminal hasn't been run)."
