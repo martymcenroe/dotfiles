@@ -24,3 +24,6 @@ export HISTFILE=~/.bash_history
 
 # Alias for a quick directory tree view
 alias llt='tree -L 2'
+
+# Alias to count GitHub commits by user in the current day
+alias gh-count='gh search commits --author martymcenroe --author-date ">=$(date -u +%Y-%m-%d)" | wc -l'
