@@ -1,0 +1,20 @@
+# --- Architect's Note ---
+# This file dictates line-ending strategy for the entire repo.
+# It ensures cross-platform consistency and silences CRLF/LF warnings.
+
+# Auto-detect text files and normalize all line endings to LF (Unix-style)
+# This is the modern, cross-platform standard.
+* text=auto eol=lf
+
+# Explicitly declare files that MUST be LF (Unix scripts)
+*.sh eol=lf
+*.bash_profile eol=lf
+
+# Explicitly declare files that SHOULD be LF (even on Windows)
+# This enforces a single, consistent line-ending for all text scripts.
+*.ps1 eol=lf
+
+# Mark binary files as binary so Git doesn't try to change them
+*.zip binary
+*.png binary
+*.jpg binary
