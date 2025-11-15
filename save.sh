@@ -29,7 +29,15 @@ WT_SETTINGS_DEST="$SCRIPT_DIR/windows/terminal/settings.json"
 # We use 'cp -v' (verbose) to see what's happening.
 
 echo "Saving .bash_profile..."
-cp -v "$BASH_PROFILE_SRC" "$BASH_PROFILE_DEST"
+# --- FIX ---
+# We MUST check if the file exists before trying to copy it.
+if [ -f "$BASH_PROFILE_SRC" ]; then
+  cp -v "$BASH_PROFILE_SRC" "$BASH_PROFILE_DEST"
+else
+  echo "Info: Live .bash_profile not found, skipping."
+  echo "      (This is normal on a new machine before install.sh is run)."
+fi
+
 
 echo "Saving Windows Terminal settings..."
 # Check if the live file exists before trying to copy
