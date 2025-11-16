@@ -1,79 +1,68 @@
 #!/bin/bash
-# --- Architect's Note ---
-# This is the main setup script for a new machine.
-# It performs two key functions:
-# 1. Installs all required applications via winget (Idempotent).
-# 2. Copies all version-controlled config files from this repo
-#    to their 'live' locations in the user's home directory.
+# This script performs a full, idempotent setup of a Windows 11
+# development environment.
 
-# --- 1. App Installation (via winget) ---
-echo "--- Installing Core Apps via winget --- "
+# -----------------------------------------------------------------
+# SECTION 1: CORE APPLICATION INSTALLATION (WINGET)
+# -----------------------------------------------------------------
+echo "--- Installing Core Applications (winget) ---"
 winget install --id Git.Git -e --source winget
 winget install --id GnuWin32.Tree -e --source winget
 winget install --id Microsoft.VisualStudioCode -e --source winget
 winget install --id GitHub.cli -e --source winget
 winget install --id jqlang.jq -e --source winget
 winget install --id Sublime.SublimeText -e --source winget
-winget install --id Python.Python.3.12 -e
-winget install --id Python.Poetry -e
-echo "✅ Core apps installed."
+
+# Install "N" and "N-1" Python versions (N-2 Policy)
+# This establishes our base interpreters.
+winget install --id Python.Python.3.14 -e --silent
+winget install --id Python.Python.3.13 -e --silent
+
+# Install Java Runtime (JRE) for SonarLint
+# This is a required dependency for the SonarLint VSCode extension.
+winget install --id EclipseAdoptium.Temurin.17.JRE -e --silent
+
+echo "✅ Core applications installed."
 echo ""
 
-# --- 2. VSCode Extension Installation ---
+# -----------------------------------------------------------------
+# SECTION 2: VSCODE EXTENSION INSTALLATION
+# -----------------------------------------------------------------
 echo "--- Installing VSCode Extensions ---"
-# We define our list of essential extensions, organized by professional stack.
+# Defines the list of extensions, organized by professional stack.
 EXTENSIONS=(
-    # ----------------------------------------
     # 1. GENERAL & AI
-    # ----------------------------------------
     "eamodio.gitlens"
     "github.copilot"
     "github.copilot-chat"
-
-    # ----------------------------------------
     # 2. WEB & FORMATTING
-    # ----------------------------------------
     "dbaeumer.vscode-eslint"
     "esbenp.prettier-vscode"
-
-    # ----------------------------------------
     # 3. PYTHON (LOCAL)
-    # ----------------------------------------
     "ms-python.python"
     "ms-python.black-formatter"
     "ms-python.flake8"
-
-    # ----------------------------------------
-    # 4. AI / RAG / JUPYTER (from your stack)
-    # ----------------------------------------
+    # 4. AI / RAG / JUPYTER
     "ms-toolsai.jupyter"
     "genieai.chatgpt-vscode"
     "yzhang.markdown-all-in-one"
-
-    # ----------------------------------------
-    # 5. CORE LANGUAGES (from your stack)
-    # ----------------------------------------
+    # 5. CORE LANGUAGES
     "ms-vscode.cpptools-extension-pack"
     "mtxr.sqltools"
-
-    # ----------------------------------------
-    # 6. CLOUD & DEVOPS (from your stack)
-    # ----------------------------------------
+    # 6. CLOUD & DEVOPS
     "amazonwebservices.aws-toolkit-vscode"
     "ms-vscode.azure-account"
     "ms-azuretools.vscode-azure-general"
     "GoogleCloudTools.cloudcode"
+    "Google.gemini-code-assist" # Peer dependency for Google Cloud Code
     "ms-azuretools.vscode-docker"
     "SonarSource.sonarlint-vscode"
-
-    # ----------------------------------------
-    # 7. DATA & SPECIALTY (from your stack)
-    # ----------------------------------------
+    # 7. DATA & SPECIALTY
     "Snowflake.snowflake-vscode-extension"
     "ms-azuretools.vscode-redis"
 )
 
-# We loop through the list and install each one
+# Loop and install each extension.
 for EXTENSION in "${EXTENSIONS[@]}"; do
     echo "Installing $EXTENSION..."
     # --force ensures it updates if already installed
@@ -82,43 +71,59 @@ done
 echo "✅ VSCode Extensions installed."
 echo ""
 
-# --- 3. Python Environment Setup ---
-# This section mirrors our "Python-for-Python" architecture
-echo "--- Configuring Python Environment ---"
+# -----------------------------------------------------------------
+# SECTION 3: PYTHON ENVIRONMENT TOOLING
+# -----------------------------------------------------------------
+echo "--- Configuring Python Tooling ---"
 
-echo "Installing pipx (Python Tool Manager)..."
-# Use 'python -m pip' to be explicit, honoring our "ground truth"
-python -m pip install --user pipx
-python -m pipx ensurepath
+echo "Installing pipx (Global Tool Manager) into 'N' Python..."
+# This installs pipx into the user-level scripts of the 'N'
+# version (3.14), as per our "rolling" architecture.
+# We use 'python.exe' to be explicit, as 'python' may be the
+# 'python3' symlink which hasn't been created yet.
+python.exe -m pip install --user pipx
 
-echo "Installing Poetry (Project Manager)..."
-# We use the official, Python-based installer
-curl -sSL https://install.python-poetry.org | python -
+echo "Bootstrapping pipx: Adding to Windows Registry PATH..."
+# This ensures pipx is on the PATH for all *future* sessions.
+python.exe -m pipx ensurepath
 
+echo "Installing Poetry (Project Manager) via official installer..."
+# This uses the mandated official installer, which is independent
+# of pipx and manages its own environment.
+curl -sSL https://install.python-poetry.org | python.exe -
+
+echo "✅ Python tooling configured."
 echo ""
 
-# --- 4. Post-Install Configuration Fixes ---
+# -----------------------------------------------------------------
+# SECTION 4: POST-INSTALL ALIASES & FIXES
+# -----------------------------------------------------------------
 echo "--- Applying Post-Install Fixes ---"
 
-# Architect's Note: Fix the "python vs python3" friction.
-# Create a 'python3.exe' symlink pointing to our real 'python.exe'.
-# This ensures 'python3' resolves to our official install, not the MS-Store stub.
-echo "Creating python3 symlink..."
-PYTHON_DIR=$(dirname $(where python | head -n 1))
-if [ -f "$PYTHON_DIR/python.exe" ] && [ ! -f "$PYTHON_DIR/python3.exe" ]; then
-  ln -s "$PYTHON_DIR/python.exe" "$PYTHON_DIR/python3.exe"
+echo "Creating 'python3' symlink..."
+# Fixes the "opposite behavior" by creating a 'python3.exe' alias
+# pointing to the primary 'python.exe' (N version).
+# We must find the "ground truth" path.
+PYTHON_EXE_PATH=$(where python | head -n 1)
+PYTHON_DIR=$(dirname "$PYTHON_EXE_PATH")
+if [ -f "$PYTHON_EXE_PATH" ] && [ ! -f "$PYTHON_DIR/python3.exe" ]; then
+  ln -s "$PYTHON_EXE_PATH" "$PYTHON_DIR/python3.exe"
   echo "Symlink created: python3.exe -> python.exe"
 else
   echo "Info: python3.exe symlink already exists or python.exe not found."
 fi
 
+echo "Upgrading default pip..."
+python.exe -m pip install --upgrade pip
+
 echo ""
 
-# --- 5. Configuration File Deployment ---
-# This copies our configs from the repo to their live locations.
-echo "--- Deploying Config Files --- "
+# -----------------------------------------------------------------
+# SECTION 5: CONFIGURATION FILE DEPLOYMENT
+# -----------------------------------------------------------------
+echo "--- Deploying Config Files from Repo --- "
 
-# The root of this git repo
+# Get the root directory of this script.
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 echo "Repo source directory is: $SCRIPT_DIR"
 
@@ -136,7 +141,6 @@ else
   echo "Info: windows/terminal/settings.json not found in repo, skipping."
 fi
 
-
 echo ""
 echo "✅ Config file deployment complete."
-echo "!!! Please CLOSE and RE-OPEN your terminal to see all changes!"
+echo "!!! Please CLOSE and RE-OPEN your terminal for all changes to take effect!"

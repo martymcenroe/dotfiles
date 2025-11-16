@@ -4,12 +4,12 @@ This repository contains my professional configuration files (\`dotfiles\`) for 
 
 ## The "Why" (The Friction)
 
-Setting up a new Windows 11 machine for professional Python development is a "morass" of friction. You have to fight:
+Setting up a new Windows 11 machine for professional Python development involves several platform-specific complexities:
 
-* **The "Stub" misdirection:** The Microsoft Store injecting "stub" versions of \`python.exe\`.
-* **The "Opposite Behavior":** Windows using \`python\` while macOS/Linux use \`python3\`.
-* **The "Manual Toil":** Manually installing all your core tools (Git, VSCode, Sublime, Poetry) one by one.
-* **The "Lost History":** The default Git Bash terminal losing your command history on every reboot.
+* **Stub Executables:** The Microsoft Store injecting "stub" versions of \`python.exe\`.
+* **Platform-Specific Aliases:** Windows using \`python\` while macOS/Linux use \`python3\`.
+* **Repetitive Manual Setup:** Manually installing all your core tools (Git, VSCode, Sublime, Poetry) one by one.
+* **Non-Persistent Shell History:** The default Git Bash terminal losing your command history on every reboot.
 
 This repository *solves* this. It's an automated, one-command system to build a clean, professional, and cross-platform-friendly environment.
 
@@ -18,7 +18,7 @@ This repository *solves* this. It's an automated, one-command system to build a 
 This architecture is 100% automated. On a new machine, you run one script (\`install.sh\`) that:
 
 1.  **Installs All Tools:** Uses `winget` to silently install Git, VSCode, Sublime, Poetry, GitHub CLI, and more.
-2.  **Fixes the "Python Opposite":** Automatically creates the \`python3.exe\` alias to shadow the Microsoft Store stubs, mirroring a macOS/Linux environment.
+2.  **Fixes the Python Aliases:** Automatically creates the \`python3.exe\` alias to shadow the Microsoft Store stubs, mirroring a macOS/Linux environment.
 3.  **Fixes History:** Deploys a `.bash_profile` that gives you persistent, robust command history.
 4.  **Deploys Configs:** Installs a secure `.gitattributes` file, your complete VSCode extension list, and your Windows Terminal settings.
 
@@ -33,7 +33,7 @@ This `dotfiles` system represents a deliberate architectural choice. We are *not
 
 * **`install.sh`:** The main bootstrap script. Run it once on a new machine.
 * **`save.sh`:** Your "daily driver." Run `./save.sh` to back up your local configs (like your terminal settings) to this repo with an automated `git push`.
-* **`automation-scripts/`:** (Sold separately) A full repo of Python-based utilities for automating your developer life (e.g., auditing GitHub repos).
+* **`automation-scripts/`:**  A full repo of Python-based utilities for automating your developer life (e.g., auditing GitHub repos).
 
 ## New Machine Bootstrap
 
