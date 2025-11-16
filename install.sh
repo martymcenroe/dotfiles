@@ -52,14 +52,14 @@ EXTENSIONS=(
     # 6. CLOUD & DEVOPS
     "amazonwebservices.aws-toolkit-vscode"
     "ms-vscode.azure-account"
-    "ms-azuretools.vscode-azure-general"
+    "ms-azuretools.vscode-azureresourcegroups" # FIX: 'vscode-azure-general' is stale.
     "GoogleCloudTools.cloudcode"
-    "Google.gemini-code-assist" # Peer dependency for Google Cloud Code
+    "google.geminicodeassist" # FIX: 'Google.gemini-code-assist' is stale.
     "ms-azuretools.vscode-docker"
     "SonarSource.sonarlint-vscode"
     # 7. DATA & SPECIALTY
-    "Snowflake.snowflake-vscode-extension"
-    "ms-azuretools.vscode-redis"
+    "Snowflake.snowflake-vsc" # FIX: 'snowflake-vscode-extension' is stale.
+    "Redis.redis-for-vscode" # FIX: 'ms-azuretools.vscode-redis' is stale.
 )
 
 # Loop and install each extension.
