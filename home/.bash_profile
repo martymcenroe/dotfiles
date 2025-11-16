@@ -1,4 +1,9 @@
 # Configures the Bash shell environment for this user.
+# AUTOMATIC SYNC: Check for changes in the live file before loading.
+if ! diff -q ~/.bash_profile home/.bash_profile > /dev/null 2>&1; then
+    echo "SYNC: Changes detected in ~/.bash_profile. Synchronizing to Git source..." >&2
+    cp ~/.bash_profile home/.bash_profile
+fi
 
 # -----------------------------------------------------------------
 # SECTION 1: PERSISTENT COMMAND HISTORY
