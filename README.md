@@ -18,7 +18,7 @@ This repository *solves* this. It's an automated, one-command system to build a 
 This architecture is 100% automated. On a new machine, you run one script (\`install.sh\`) that:
 
 1.  **Installs All Tools:** Uses `winget` to silently install Git, VSCode, Sublime, Poetry, GitHub CLI, and more.
-2.  **Fixes the "Python Mess":** Automatically creates the \`python3.exe\` alias to shadow the Microsoft Store stubs, mirroring a macOS/Linux environment.
+2.  **Fixes the "Python Opposite":** Automatically creates the \`python3.exe\` alias to shadow the Microsoft Store stubs, mirroring a macOS/Linux environment.
 3.  **Fixes History:** Deploys a `.bash_profile` that gives you persistent, robust command history.
 4.  **Deploys Configs:** Installs a secure `.gitattributes` file, your complete VSCode extension list, and your Windows Terminal settings.
 

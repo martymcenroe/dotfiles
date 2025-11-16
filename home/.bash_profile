@@ -1,29 +1,39 @@
-# --- Architect's Note ---
-# This file configures the Bash shell environment.
-# It's sourced on login and contains settings for a robust,
-# persistent command history, fixing the "lost history" problem.
+# Configures the Bash shell environment for this user.
 
-# Don't save duplicate commands or trivial commands
+# -----------------------------------------------------------------
+# SECTION 1: PERSISTENT COMMAND HISTORY
+# -----------------------------------------------------------------
+# Do not save duplicate commands or trivial commands in history.
 export HISTCONTROL=ignoreboth:erasedups
 
-# Set large history file size
+# Set a large history file size.
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 
-# Append to history, don't overwrite it
+# Append to the history file, do not overwrite it on session exit.
 shopt -s histappend
 
-# --- The "Fix" ---
-# This line is the magic. It tells Bash to run 'history -a'
-# (append history) *before* rendering the next prompt.
-# This saves the command *immediately*.
+# Set PROMPT_COMMAND to append the last command to history immediately,
+# ensuring the session history is saved before the next prompt is drawn.
 export PROMPT_COMMAND="history -a"
 
-# Define the persistent history file location
+# Define the persistent history file location.
 export HISTFILE=~/.bash_history
 
-# Alias for a quick directory tree view
-alias llt='tree -L 2'
+# Alias for a 2-level directory tree view, ignoring .git.
+alias llt='tree -a -L 2 -I .git'
 
-# Alias to count GitHub commits by user in the current day
-alias gh-count='gh search commits --author martymcenroe --author-date ">=$(date -u +%Y-%m-%d)" | wc -l'
+# -----------------------------------------------------------------
+# SECTION 2: CUSTOM WINDOWS PATH CONFIGURATION
+# -----------------------------------------------------------------
+# Manually add required user-level script paths for Python tools
+# to ensure they are discoverable in the shell.
+
+# Add Python (N-version) user-level scripts (for 'pipx').
+export PATH="$PATH:$HOME/AppData/Roaming/Python/Python314/Scripts"
+
+# Add Poetry (official installer) bin path.
+export PATH="$PATH:$HOME/AppData/Roaming/pypoetry/bin"
+
+# Add pipx global tool bin path (managed by 'pipx ensurepath').
+export PATH="$PATH:$HOME/.local/bin"
