@@ -90,7 +90,27 @@ python.exe -m pipx ensurepath
 echo "Installing Poetry (Project Manager) via official installer..."
 # This uses the mandated official installer, which is independent
 # of pipx and manages its own environment.
-curl -sSL https://install.python-poetry.org | python.exe -
+if curl -sSL https://install.python-poetry.org | python.exe -; then
+    echo "Poetry installer completed."
+    
+    # Add to current session PATH immediately
+    export PATH="$APPDATA/pypoetry/venv/Scripts:$PATH"
+    
+    # Also refresh from registry for any other updates
+    NEW_USER_PATH=$(powershell.exe -Command '[Environment]::GetEnvironmentVariable("Path", "User")' | tr -d '\r')
+    export PATH="$NEW_USER_PATH:$PATH"
+    
+    # Verify
+    if command -v poetry &> /dev/null; then
+        echo "✅ Poetry installed successfully: $(poetry --version)"
+    else
+        echo "❌ ERROR: Poetry not found after installation"
+        exit 1
+    fi
+else
+    echo "❌ ERROR: Poetry installation failed"
+    exit 1
+fi
 
 echo "✅ Python tooling configured."
 echo ""
