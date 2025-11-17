@@ -27,9 +27,3 @@ export HISTFILE=~/.bash_history
 
 # Alias for a 2-level directory tree view, ignoring .git.
 alias llt='tree -a -L 2 -I .git'
-
-
-# User-Defined GitHub CLI Aliases
-# Persistent aliases for custom metrics and issue retrieval.
-alias gh-count='gh search commits --author martymcenroe --author-date ">=$(date -u +%Y-%m-%d)" | wc -l'
-alias gh-issue-list="gh issue list --json number,title,body --template '{{range .}}### Issue #{{.number}}: {{.title}}\n\nBody:\n---\n{{.body}}\n---\n\n\n{{end}}'"
