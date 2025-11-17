@@ -79,13 +79,13 @@ echo "--- Configuring Python Tooling ---"
 echo "Installing pipx (Global Tool Manager) into 'N' Python..."
 # This installs pipx into the user-level scripts of the 'N'
 # version (3.14), as per our "rolling" architecture.
-# We use 'python.exe' to be explicit, as 'python' may be the
-# 'python3' symlink which hasn't been created yet.
-python.exe -m pip install --user pipx
+# We use Python Launcher 'py -3' which always finds the latest system Python,
+# not 'python.exe' which can resolve to Poetry's venv after first run.
+py -3 -m pip install --user pipx
 
 echo "Bootstrapping pipx: Adding to Windows Registry PATH..."
 # This ensures pipx is on the PATH for all *future* sessions.
-python.exe -m pipx ensurepath
+py -3 -m pipx ensurepath
 
 echo "Installing Poetry (Project Manager) via official installer..."
 # This uses the mandated official installer, which is independent
@@ -93,18 +93,34 @@ echo "Installing Poetry (Project Manager) via official installer..."
 if curl -sSL https://install.python-poetry.org | python.exe -; then
     echo "Poetry installer completed."
     
-    # Add to current session PATH immediately
-    export PATH="$APPDATA/pypoetry/venv/Scripts:$PATH"
+    # Find where poetry.exe actually installed
+    POETRY_EXE=$(find "$APPDATA/pypoetry" -name "poetry.exe" -type f 2>/dev/null | head -n 1)
     
-    # Also refresh from registry for any other updates
-    NEW_USER_PATH=$(powershell.exe -Command '[Environment]::GetEnvironmentVariable("Path", "User")' | tr -d '\r')
-    export PATH="$NEW_USER_PATH:$PATH"
-    
-    # Verify
-    if command -v poetry &> /dev/null; then
-        echo "✅ Poetry installed successfully: $(poetry --version)"
+    if [ -n "$POETRY_EXE" ]; then
+        POETRY_DIR=$(dirname "$POETRY_EXE")
+        # Convert to Windows path format
+        POETRY_WIN_PATH=$(cygpath -w "$POETRY_DIR")
+        
+        echo "Fixing Poetry PATH in Windows Registry..."
+        # Remove incorrect Poetry path and add correct one
+        powershell.exe -Command "
+            \$userPath = [Environment]::GetEnvironmentVariable('Path', 'User');
+            \$userPath = \$userPath -replace '[^;]*pypoetry[^;]*;?', '';
+            \$userPath = \$userPath.TrimEnd(';');
+            \$userPath = \$userPath + ';$POETRY_WIN_PATH';
+            [Environment]::SetEnvironmentVariable('Path', \$userPath, 'User');
+        "
+        
+        # Add to current session for immediate verification
+        export PATH="$POETRY_DIR:$PATH"
+        
+        if command -v poetry &> /dev/null; then
+            echo "✅ Poetry installed successfully: $(poetry --version)"
+        else
+            echo "⚠️  Poetry installed but verification failed. Restart terminal."
+        fi
     else
-        echo "❌ ERROR: Poetry not found after installation"
+        echo "❌ ERROR: Poetry executable not found after installation"
         exit 1
     fi
 else
@@ -161,6 +177,11 @@ else
   echo "Info: windows/terminal/settings.json not found in repo, skipping."
 fi
 
+echo ""echo "✅ Config file deployment complete."
 echo ""
-echo "✅ Config file deployment complete."
-echo "!!! Please CLOSE and RE-OPEN your terminal for all changes to take effect!"
+echo "!!! To apply all PATH changes, either:"
+echo "    1. CLOSE and RE-OPEN your terminal, OR"
+echo "    2. Run this command to refresh PATH in current session:"
+echo ""
+echo "NEW_USER_PATH=\$(powershell.exe -Command '[Environment]::GetEnvironmentVariable(\"Path\", \"User\")' | tr -d '\\r')"
+echo "export PATH=\"\$NEW_USER_PATH:\$PATH\""
