@@ -28,20 +28,6 @@ export HISTFILE=~/.bash_history
 # Alias for a 2-level directory tree view, ignoring .git.
 alias llt='tree -a -L 2 -I .git'
 
-# -----------------------------------------------------------------
-# SECTION 2: CUSTOM WINDOWS PATH CONFIGURATION
-# -----------------------------------------------------------------
-# Manually add required user-level script paths for Python tools
-# to ensure they are discoverable in the shell.
-
-# Add Python (N-version) user-level scripts (for 'pipx').
-export PATH="$PATH:$HOME/AppData/Roaming/Python/Python314/Scripts"
-
-# Add Poetry (official installer) bin path.
-export PATH="$PATH:$HOME/AppData/Roaming/pypoetry/bin"
-
-# Add pipx global tool bin path (managed by 'pipx ensurepath').
-export PATH="$PATH:$HOME/.local/bin"
 
 # User-Defined GitHub CLI Aliases
 # Persistent aliases for custom metrics and issue retrieval.
