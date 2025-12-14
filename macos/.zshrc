@@ -1,4 +1,4 @@
-source "${HOME}/.bash_profile"
+source "${HOME}/dotfiles/common/.bash_profile"
 
 # --- RESTORED CUSTOMIZATIONS (Zsh-specific) ---
 #
