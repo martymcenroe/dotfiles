@@ -110,4 +110,26 @@ MIT. Use it. Fork it. Star it if it saved you time.
 
 ---
 
+## 🍎 macOS Setup (Beta)
+
+**Status:** Manual Sync Only (Automation in progress)
+
+While the Windows setup is fully automated, the macOS configuration currently supports manual synchronization of shell profiles.
+
+### Architecture
+* **Zsh/Bash Profile:** Located in \`macos/.bash_profile\` (sourced by \`.zshrc\`).
+* **Sync Logic:** The profile includes a self-check mechanism. If your local \`~/.bash_profile\` differs from the repo version, it will alert you.
+
+### Quick Install (macOS)
+\`\`\`zsh
+# 1. Clone the repo
+git clone https://github.com/martymcenroe/dotfiles.git ~/dotfiles
+
+# 2. Link the profile (Manual for now)
+echo "source ~/dotfiles/macos/.bash_profile" >> ~/.zshrc
+source ~/.zshrc
+\`\`\`
+
+---
+
 **Current Status:** Production-ready. I use this daily. Your mileage may vary, but probably won't.
