@@ -133,3 +133,42 @@ source ~/.zshrc
 ---
 
 **Current Status:** Production-ready. I use this daily. Your mileage may vary, but probably won't.
+---
+
+## 🍎 macOS / Linux Setup (Beta)
+
+**Status:** Manual Sync Only
+
+### Architecture
+* **Shared Logic:** The core shell configuration lives in `common/.bash_profile`. This is shared between Windows (Git Bash) and macOS.
+* **OS-Specific:** The `macos/.zshrc` simply loads the common profile.
+
+### Quick Install (macOS)
+```zsh
+# 1. Clone the repo
+git clone https://github.com/martymcenroe/dotfiles.git ~/dotfiles
+
+# 2. Link the profile (Manual for now)
+echo "source ~/dotfiles/common/.bash_profile" >> ~/.zshrc
+source ~/.zshrc
+```
+
+---
+
+## 🍎 macOS / Linux Setup (Beta)
+
+**Status:** Manual Sync Only
+
+### Architecture
+* **Shared Logic:** The core shell configuration lives in `common/.bash_profile`. This is shared between Windows (Git Bash) and macOS.
+* **OS-Specific:** The `macos/.zshrc` simply loads the common profile.
+
+### Quick Install (macOS)
+```zsh
+# 1. Clone the repo
+git clone https://github.com/martymcenroe/dotfiles.git ~/dotfiles
+
+# 2. Link the profile (Manual for now)
+echo "source ~/dotfiles/common/.bash_profile" >> ~/.zshrc
+source ~/.zshrc
+```

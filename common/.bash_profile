@@ -1,8 +1,8 @@
 # Configures the Bash shell environment for this user.
 # AUTOMATIC SYNC: Check for changes in the live file before loading.
-if ! diff -q ~/.bash_profile ~/dotfiles/macos/.bash_profile > /dev/null 2>&1; then
+if ! diff -q ~/.bash_profile ~/dotfiles/common/.bash_profile > /dev/null 2>&1; then
     echo "SYNC: Changes detected in ~/.bash_profile. Synchronizing to Git source..." >&2
-    cp ~/.bash_profile ~/dotfiles/macos/.bash_profile
+    cp ~/.bash_profile ~/dotfiles/common/.bash_profile
 fi
 
 # -----------------------------------------------------------------
