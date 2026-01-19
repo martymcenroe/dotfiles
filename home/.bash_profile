@@ -13,11 +13,12 @@ if [ -f "$REPO_FILE" ]; then
     if ! diff -q "$HOME/.bash_profile" "$REPO_FILE" > /dev/null 2>&1; then
         echo "SYNC: Changes detected in ~/.bash_profile. Synchronizing to Git source..." >&2
         cp "$HOME/.bash_profile" "$REPO_FILE"
-        # Auto-commit the change (runs in background to not slow shell startup)
+        # Auto-commit and push (runs in background to not slow shell startup)
         (
             cd "$REPO_DIR" &&
             git add home/.bash_profile &&
-            git commit -m "auto: sync .bash_profile $(date +%Y-%m-%d_%H-%M-%S)"
+            git commit -m "auto: sync .bash_profile $(date +%Y-%m-%d_%H-%M-%S)" &&
+            git push origin main
         ) > /dev/null 2>&1 &
         echo "✅ Sync complete (auto-commit in background)." >&2
     fi
