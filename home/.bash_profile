@@ -65,15 +65,20 @@ OCTOCAT=$(printf '\uf113')
 
 # Colors: Green Date/Time, Cyan Path, Yellow Branch
 # Symbol: Octocat (Generated via variable)
-export PS1="\[\033[32m\][\D{%m-%d} \t] \[\033[36m\]\w\[\033[33m\]\$(__git_ps1 ' (%s)')\[\033[0m\] $OCTOCAT "
+export PS1="\[\033[32m\][\D{%m-%d} 	] \[\033[36m\]\w\[\033[33m\]\$(__git_ps1 ' (%s)')\[\033[0m\] $OCTOCAT "
 
 # -----------------------------------------------------------------
 # SECTION 4: AGENTOS
 # -----------------------------------------------------------------
 
-# Load Secrets
+# Load S-e-c-r-e-t-s
 if [ -f ~/.agentos_secrets ]; then
     source ~/.agentos_secrets
+fi
+
+# Load AgentOS environment (LangSmith, etc.)
+if [ -f ~/.agentos/env ]; then
+    source ~/.agentos/env
 fi
 
 # Editor Alias
@@ -88,23 +93,33 @@ alias unleashed='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Pro
 # UNLEASHED TEST -
 alias unleashed-test='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-test.py --cwd "$PROJECT_PATH")'
 
-# UNLEASHED VERSIONED (00002-00020 pre-positioned)
-alias unleashed-00002='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00002.py --cwd "$PROJECT_PATH")'
-alias unleashed-00003='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00003.py --cwd "$PROJECT_PATH")'
-alias unleashed-00004='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00004.py --cwd "$PROJECT_PATH")'
-alias unleashed-00005='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00005.py --cwd "$PROJECT_PATH")'
-alias unleashed-00006='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00006.py --cwd "$PROJECT_PATH")'
-alias unleashed-00007='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00007.py --cwd "$PROJECT_PATH")'
-alias unleashed-00008='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00008.py --cwd "$PROJECT_PATH")'
-alias unleashed-00009='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00009.py --cwd "$PROJECT_PATH")'
-alias unleashed-00010='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00010.py --cwd "$PROJECT_PATH")'
-alias unleashed-00011='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00011.py --cwd "$PROJECT_PATH")'
-alias unleashed-00012='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00012.py --cwd "$PROJECT_PATH")'
-alias unleashed-00013='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00013.py --cwd "$PROJECT_PATH")'
-alias unleashed-00014='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00014.py --cwd "$PROJECT_PATH")'
-alias unleashed-00015='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00015.py --cwd "$PROJECT_PATH")'
-alias unleashed-00016='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00016.py --cwd "$PROJECT_PATH")'
-alias unleashed-00017='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00017.py --cwd "$PROJECT_PATH")'
-alias unleashed-00018='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00018.py --cwd "$PROJECT_PATH")'
-alias unleashed-00019='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00019.py --cwd "$PROJECT_PATH")'
-alias unleashed-00020='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-00020.py --cwd "$PROJECT_PATH")'
+# UNLEASHED-C (Claude) VERSIONED (2-digit: 16 and below)
+alias unleashed-c='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-17='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-17.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-16='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-16.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-15='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-15.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-14='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-14.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-13='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-13.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-12='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-12.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-11='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-11.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-10='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-10.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-09='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-09.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-08='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-08.py --cwd "$PROJECT_PATH")'
+alias unleashed-c-07='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-07.py --cwd "$PROJECT_PATH")'
+
+# UNLEASHED-G (Gemini) VERSIONED (2-digit: 17 and above)
+alias unleashed-g='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-17='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-17.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-18='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-18.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-19='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-19.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-20='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-20.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-21='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-21.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-22='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-22.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-23='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-23.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-24='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-24.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-25='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-25.py --cwd "$PROJECT_PATH")'
+alias unleashed-g-26='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-g-26.py --cwd "$PROJECT_PATH")'
+
+# AGENTOS BATCH WORKFLOW - Run multiple issues unattended
+# Usage: batch-workflow --type <issue|lld|impl> [--gates none|auto] [--yes] [--continue-on-fail] <issues> 
+alias batch-workflow='/c/Users/mcwiz/Projects/AgentOS/tools/batch-workflow.sh'
