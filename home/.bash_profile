@@ -85,20 +85,41 @@ fi
 alias subl="/c/Program\ Files/Sublime\ Text/subl.exe"
 
 # SENTINEL - Security Gatekeeper
-alias sentinel='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/sentinel.py --cwd "$PROJECT_PATH" "$@")'
+sentinel() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/sentinel.py --cwd "$PROJECT_PATH" "$@")
+}
 
-# UNLEASHED - Autonomous Coding
-alias unleashed='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH")'
+# UNLEASHED - Autonomous Coding (v18, shell functions for arg passthrough)
+unleashed() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH" "$@")
+}
 
-# UNLEASHED TEST -
-alias unleashed-test='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-test.py --cwd "$PROJECT_PATH")'
+unleashed-test() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-test.py --cwd "$PROJECT_PATH" "$@")
+}
 
-# UNLEASHED-C (Claude) VERSIONED (2-digit: 16 and below)
-alias unleashed-c='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH")'
-alias unleashed-c-18='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH")'
-alias unleashed-c-18-mirror='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --cwd "$PROJECT_PATH")'
-alias unleashed-c-18-triplet='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --friction --cwd "$PROJECT_PATH")'
-alias unleashed-c-18-joint='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --joint-log --friction --cwd "$PROJECT_PATH")'
+# UNLEASHED-C (Claude) — v18 functions with arg passthrough
+unleashed-c() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-18() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-18-mirror() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-18-triplet() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-18-joint() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
+}
+
+# UNLEASHED-C (Claude) LEGACY ALIASES (v16 and below, no passthrough)
 alias unleashed-c-17='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-17.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-16='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-16.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-15='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-15.py --cwd "$PROJECT_PATH")'
