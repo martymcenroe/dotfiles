@@ -94,7 +94,7 @@ alias unleashed='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Pro
 alias unleashed-test='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-test.py --cwd "$PROJECT_PATH")'
 
 # UNLEASHED-C (Claude) VERSIONED (2-digit: 16 and below)
-alias unleashed-c='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed.py --cwd "$PROJECT_PATH")'
+alias unleashed-c='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-18='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-18-mirror='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --cwd "$PROJECT_PATH")'
 alias unleashed-c-18-triplet='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --mirror --friction --cwd "$PROJECT_PATH")'
