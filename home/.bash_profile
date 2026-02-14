@@ -99,7 +99,7 @@ unleashed-c-21() {
 }
 
 unleashed-c-21-triplet() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel --mirror --friction --cwd "$PROJECT_PATH" "$@")
 }
 
 unleashed-c-21-joint() {
