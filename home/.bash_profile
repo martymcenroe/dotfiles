@@ -119,7 +119,29 @@ unleashed-c-18-joint() {
   (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
 }
 
-# UNLEASHED-C (Claude) LEGACY ALIASES (v16 and below, no passthrough)
+# UNLEASHED-C (Claude) — v20 functions with arg passthrough
+unleashed-c-20() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-20.py --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-20-mirror() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-20.py --mirror --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-20-triplet() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-20.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-20-joint() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-20.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
+}
+
+# UNLEASHED-C (Claude) — v19 function (v16-based, transcript only, no mirror/friction)
+unleashed-c-19() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-19.py --cwd "$PROJECT_PATH" "$@")
+}
+
+# UNLEASHED-C (Claude) LEGACY ALIASES (v17 and below, no passthrough)
 alias unleashed-c-17='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-17.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-16='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-16.py --cwd "$PROJECT_PATH")'
 alias unleashed-c-15='(PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-15.py --cwd "$PROJECT_PATH")'
