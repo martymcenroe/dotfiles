@@ -95,19 +95,11 @@ unleashed() {
 }
 
 unleashed-c-21() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --cwd "$PROJECT_PATH" "$@")
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
 }
 
-unleashed-c-21-triplet() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel --mirror --friction --cwd "$PROJECT_PATH" "$@")
-}
-
-unleashed-c-21-joint() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
-}
-
-unleashed-sentinel() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel --mirror --friction --cwd "$PROJECT_PATH" "$@")
+sentinel-c-21() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel-shadow --mirror --friction --cwd "$PROJECT_PATH" "$@")
 }
 
 # BATCH WORKFLOW - Run multiple issues unattended
