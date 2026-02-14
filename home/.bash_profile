@@ -119,6 +119,23 @@ unleashed-c-18-joint() {
   (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
 }
 
+# UNLEASHED-C (Claude) — v21 functions with arg passthrough
+unleashed-c-21() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-21-mirror() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --mirror --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-21-triplet() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
+}
+
+unleashed-c-21-joint() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
+}
+
 # UNLEASHED-C (Claude) — v20 functions with arg passthrough
 unleashed-c-20() {
   (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-20.py --cwd "$PROJECT_PATH" "$@")
