@@ -106,6 +106,10 @@ unleashed-c-21-joint() {
   (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --joint-log --friction --cwd "$PROJECT_PATH" "$@")
 }
 
+unleashed-sentinel() {
+  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel --mirror --friction --cwd "$PROJECT_PATH" "$@")
+}
+
 # BATCH WORKFLOW - Run multiple issues unattended
 alias batch-workflow='/c/Users/mcwiz/Projects/AssemblyZero/tools/batch-workflow.sh'
 
