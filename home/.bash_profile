@@ -119,11 +119,12 @@ _unleashed_run() {
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-21.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-22.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
-  _unleashed_run src/unleashed-c-22.py --sentinel-shadow --mirror --friction "$@"
+  echo "No beta version configured. Promote a new build with: unleashed-alpha → unleashed-beta"
+  return 1
 }
 
 unleashed-alpha() {
