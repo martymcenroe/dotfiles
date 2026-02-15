@@ -98,13 +98,13 @@ _unleashed_log() {
   local script="$1"
   local project_path="$2"
   local tier="unknown"
-  case "${FUNCNAME[1]}" in
+  case "${FUNCNAME[2]}" in
     unleashed) tier="prod" ;;
     unleashed-beta) tier="beta" ;;
     unleashed-alpha) tier="alpha" ;;
   esac
   local version
-  version=$(echo "$script" | grep -oP 'c-\K\d+')
+  version=$(echo "$script" | sed -n 's/.*c-\([0-9]*\).*/\1/p')
   printf '%s\t%s\t%s\tc-%s\n' \
     "$(date -Iseconds)" "$tier" "$project_path" "$version" \
     >> ~/.unleashed-usage.log
