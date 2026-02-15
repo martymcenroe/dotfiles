@@ -89,17 +89,47 @@ sentinel() {
   (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/sentinel.py --cwd "$PROJECT_PATH" "$@")
 }
 
-# UNLEASHED - Production (c-18) + Latest (c-21)
+# UNLEASHED - Tier System (prod / beta / alpha)
+# Mapping: prod=c-21, beta=(none), alpha=(none)
+# Last promotion: 2026-02-15 prod←c-21 (sentinel shadow + mirror + friction)
+# See: https://github.com/martymcenroe/unleashed/wiki/Version-Promotions
+
+_unleashed_log() {
+  local script="$1"
+  local project_path="$2"
+  local tier="unknown"
+  case "${FUNCNAME[1]}" in
+    unleashed) tier="prod" ;;
+    unleashed-beta) tier="beta" ;;
+    unleashed-alpha) tier="alpha" ;;
+  esac
+  local version
+  version=$(echo "$script" | grep -oP 'c-\K\d+')
+  printf '%s\t%s\t%s\tc-%s\n' \
+    "$(date -Iseconds)" "$tier" "$project_path" "$version" \
+    >> ~/.unleashed-usage.log
+}
+
+_unleashed_run() {
+  local script="$1"; shift
+  local project_path
+  project_path="$(cygpath -w "$(pwd)")"
+  _unleashed_log "$script" "$project_path"
+  (cd /c/Users/mcwiz/Projects/unleashed && poetry run python "$script" --cwd "$project_path" "$@")
+}
+
 unleashed() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-18.py --cwd "$PROJECT_PATH" "$@")
+  _unleashed_run src/unleashed-c-21.py --sentinel-shadow --mirror --friction "$@"
 }
 
-unleashed-c-21() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --mirror --friction --cwd "$PROJECT_PATH" "$@")
+unleashed-beta() {
+  echo "No beta version configured. Promote a new build with: unleashed-alpha → unleashed-beta"
+  return 1
 }
 
-sentinel-c-21() {
-  (PROJECT_PATH="$(cygpath -w "$(pwd)")" && cd /c/Users/mcwiz/Projects/unleashed && poetry run python src/unleashed-c-21.py --sentinel-shadow --mirror --friction --cwd "$PROJECT_PATH" "$@")
+unleashed-alpha() {
+  echo "No alpha version configured. Create a new build first."
+  return 1
 }
 
 # BATCH WORKFLOW - Run multiple issues unattended
