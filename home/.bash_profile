@@ -132,6 +132,17 @@ unleashed-alpha() {
   return 1
 }
 
+# --- Gemini tier system ---
+# Prod: g-18 (stable, no triplet)
+# Beta: g-19 (triplet + 0.2s approval delay fix)
+unleashed-g() {
+  _unleashed_run src/unleashed-g-18.py "$@"
+}
+
+unleashed-g-beta() {
+  _unleashed_run src/unleashed-g-19.py "$@"
+}
+
 # BATCH WORKFLOW - Run multiple issues unattended
 alias batch-workflow='/c/Users/mcwiz/Projects/AssemblyZero/tools/batch-workflow.sh'
 
