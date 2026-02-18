@@ -133,13 +133,8 @@ unleashed-alpha() {
 }
 
 # --- Gemini tier system ---
-# Prod: g-18 (stable, no triplet)
-# Beta: g-19 (triplet + 0.2s approval delay fix)
+# Prod: g-19 (triplet + 0.2s approval delay + 3 permission patterns)
 unleashed-g() {
-  _unleashed_run src/unleashed-g-18.py "$@"
-}
-
-unleashed-g-beta() {
   _unleashed_run src/unleashed-g-19.py "$@"
 }
 
