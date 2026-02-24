@@ -123,7 +123,8 @@ unleashed() {
 }
 
 unleashed-beta() {
-  _unleashed_run src/unleashed-c-24.py --sentinel-shadow --mirror --friction "$@"
+  echo "No beta version configured. Promote a new build with: unleashed-alpha → unleashed-beta"
+  return 1
 }
 
 unleashed-alpha() {
