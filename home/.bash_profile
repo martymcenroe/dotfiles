@@ -119,16 +119,16 @@ _unleashed_run() {
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-24.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-25.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
-  echo "No beta version configured. Promote a new build with: unleashed-alpha → unleashed-beta"
-  return 1
+  _unleashed_run src/unleashed-c-24.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-alpha() {
-  _unleashed_run src/unleashed-c-25.py --sentinel-shadow --mirror --friction "$@"
+  echo "No alpha version configured. Promote a new build with: create new version → unleashed-alpha"
+  return 1
 }
 
 # --- Gemini tier system ---
