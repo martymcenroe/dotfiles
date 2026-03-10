@@ -139,7 +139,15 @@ unleashed-g() {
 }
 
 unleashed-t() {
-  _unleashed_run src/unleashed-t-01.py "$@"
+  local repo_root="/c/Users/mcwiz/Projects/unleashed"
+  local script="src/unleashed-t-01.py"
+  if [ ! -f "$repo_root/$script" ] && [ -f /c/Users/mcwiz/Projects/unleashed-56/$script ]; then
+    repo_root="/c/Users/mcwiz/Projects/unleashed-56"
+  fi
+  local project_path
+  project_path="$(cygpath -w "$(pwd)")"
+  _unleashed_log "$script" "$project_path"
+  (cd "$repo_root" && poetry run python "$script" --cwd "$project_path" "$@")
 }
 
 # BATCH WORKFLOW - Run multiple issues unattended
