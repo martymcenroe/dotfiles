@@ -138,6 +138,10 @@ unleashed-g() {
   _unleashed_run src/unleashed-g-19.py "$@"
 }
 
+unleashed-t() {
+  _unleashed_run src/unleashed-t-01.py "$@"
+}
+
 # BATCH WORKFLOW - Run multiple issues unattended
 alias batch-workflow='/c/Users/mcwiz/Projects/AssemblyZero/tools/batch-workflow.sh'
 
