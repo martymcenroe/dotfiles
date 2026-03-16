@@ -128,8 +128,7 @@ unleashed-beta() {
 }
 
 unleashed-alpha() {
-  echo "No alpha version configured. Promote a new build with: create new version → unleashed-alpha"
-  return 1
+  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
 }
 
 # --- Gemini tier system ---
