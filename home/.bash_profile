@@ -130,8 +130,9 @@ unleashed-beta() {
 unleashed-alpha() {
   local project_path
   project_path="$(cygpath -w "$(pwd)")"
+  local _py="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-dvqmcGZk-py3.14/Scripts/python.exe"
   _unleashed_log "src/unleashed-c-27.py" "$project_path"
-  PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" python /c/Users/mcwiz/Projects/unleashed/src/unleashed-c-27.py --cwd "$project_path" --sentinel-shadow --mirror --friction "$@"
+  PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/src/unleashed-c-27.py --cwd "$project_path" --sentinel-shadow --mirror --friction "$@"
 }
 
 # --- Gemini tier system ---
