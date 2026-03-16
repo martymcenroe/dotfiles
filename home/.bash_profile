@@ -114,12 +114,13 @@ _unleashed_run() {
   local script="$1"; shift
   local project_path
   project_path="$(cygpath -w "$(pwd)")"
+  local _py="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-dvqmcGZk-py3.14/Scripts/python.exe"
   _unleashed_log "$script" "$project_path"
-  (cd /c/Users/mcwiz/Projects/unleashed && poetry run python "$script" --cwd "$project_path" "$@")
+  PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/"$script" --cwd "$project_path" "$@"
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-26.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
@@ -128,11 +129,8 @@ unleashed-beta() {
 }
 
 unleashed-alpha() {
-  local project_path
-  project_path="$(cygpath -w "$(pwd)")"
-  local _py="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-dvqmcGZk-py3.14/Scripts/python.exe"
-  _unleashed_log "src/unleashed-c-27.py" "$project_path"
-  PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/src/unleashed-c-27.py --cwd "$project_path" --sentinel-shadow --mirror --friction "$@"
+  echo "No alpha version configured. Promote a new build with: create new version → unleashed-alpha"
+  return 1
 }
 
 # --- Gemini tier system ---
