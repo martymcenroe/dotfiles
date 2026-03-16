@@ -134,21 +134,15 @@ unleashed-alpha() {
 }
 
 # --- Gemini tier system ---
-# Prod: g-19 (triplet + 0.2s approval delay + 3 permission patterns)
+# Prod: g-20 (g-19 + console tab, per-repo logs, focus-back, tab-naming)
 unleashed-g() {
-  _unleashed_run src/unleashed-g-19.py "$@"
+  _unleashed_run src/unleashed-g-20.py "$@"
 }
 
+# --- Codex tier system ---
+# Prod: t-02 (t-01 + console tab, per-repo logs, focus-back)
 unleashed-t() {
-  local repo_root="/c/Users/mcwiz/Projects/unleashed"
-  local script="src/unleashed-t-01.py"
-  if [ ! -f "$repo_root/$script" ] && [ -f /c/Users/mcwiz/Projects/unleashed-56/$script ]; then
-    repo_root="/c/Users/mcwiz/Projects/unleashed-56"
-  fi
-  local project_path
-  project_path="$(cygpath -w "$(pwd)")"
-  _unleashed_log "$script" "$project_path"
-  (cd "$repo_root" && poetry run python "$script" --cwd "$project_path" "$@")
+  _unleashed_run src/unleashed-t-02.py "$@"
 }
 
 # BATCH WORKFLOW - Run multiple issues unattended
