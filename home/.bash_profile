@@ -114,9 +114,13 @@ _unleashed_run() {
   local script="$1"; shift
   local project_path
   project_path="$(cygpath -w "$(pwd)")"
-  local _py="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-dvqmcGZk-py3.14/Scripts/python.exe"
+  # Use poetry's active venv python + put its Scripts on PATH so tools like
+  # edge-tts, yt-dlp etc. are available to Claude sessions (was lost when
+  # we dropped poetry run — see #83)
+  local _venv="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-Zukdy2xA-py3.14"
+  local _py="$_venv/Scripts/python.exe"
   _unleashed_log "$script" "$project_path"
-  PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/"$script" --cwd "$project_path" "$@"
+  PATH="$_venv/Scripts:$PATH" PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/"$script" --cwd "$project_path" "$@"
 }
 
 unleashed() {
