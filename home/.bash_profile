@@ -90,8 +90,8 @@ sentinel() {
 }
 
 # UNLEASHED - Tier System (prod / beta / alpha)
-# Mapping: prod=c-26, beta=(none), alpha=(none)
-# Last promotion: 2026-03-15 prod←c-26 (per-repo logs, tab focus-back, console tab)
+# Mapping: prod=c-28, beta=c-27, alpha=(none)
+# Last promotion: 2026-03-16 prod←c-28 (auto-handoff: compaction trigger + timer reminder)
 # See: https://github.com/martymcenroe/unleashed/wiki/Version-Promotions
 
 _unleashed_log() {
@@ -124,12 +124,11 @@ _unleashed_run() {
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-28.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
-  echo "No beta version configured. Promote a new build with: unleashed-alpha → unleashed-beta"
-  return 1
+  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-alpha() {
