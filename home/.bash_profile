@@ -90,8 +90,8 @@ sentinel() {
 }
 
 # UNLEASHED - Tier System (prod / beta / alpha)
-# Mapping: prod=c-26, beta=(none), alpha=(none)
-# Last promotion: 2026-03-15 prod←c-26 (per-repo logs, tab focus-back, console tab)
+# Mapping: prod=c-27, beta=(none), alpha=c-28
+# Last promotion: 2026-03-16 alpha←c-28 (auto-handoff: compaction trigger + timer reminder)
 # See: https://github.com/martymcenroe/unleashed/wiki/Version-Promotions
 
 _unleashed_log() {
@@ -133,8 +133,7 @@ unleashed-beta() {
 }
 
 unleashed-alpha() {
-  echo "No alpha version configured. Promote a new build with: create new version → unleashed-alpha"
-  return 1
+  _unleashed_run src/unleashed-c-28.py --sentinel-shadow --mirror --friction "$@"
 }
 
 # --- Gemini tier system ---
