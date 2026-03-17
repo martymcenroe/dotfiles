@@ -90,8 +90,8 @@ sentinel() {
 }
 
 # UNLEASHED - Tier System (prod / beta / alpha)
-# Mapping: prod=c-24, beta=(none), alpha=c-25
-# Last promotion: 2026-02-23 prod←c-24 (auto-tab-naming)
+# Mapping: prod=c-26, beta=(none), alpha=(none)
+# Last promotion: 2026-03-15 prod←c-26 (per-repo logs, tab focus-back, console tab)
 # See: https://github.com/martymcenroe/unleashed/wiki/Version-Promotions
 
 _unleashed_log() {
@@ -114,12 +114,17 @@ _unleashed_run() {
   local script="$1"; shift
   local project_path
   project_path="$(cygpath -w "$(pwd)")"
+  # Use poetry's active venv python + put its Scripts on PATH so tools like
+  # edge-tts, yt-dlp etc. are available to Claude sessions (was lost when
+  # we dropped poetry run — see #83)
+  local _venv="/c/Users/mcwiz/AppData/Local/pypoetry/Cache/virtualenvs/unleashed-Zukdy2xA-py3.14"
+  local _py="$_venv/Scripts/python.exe"
   _unleashed_log "$script" "$project_path"
-  (cd /c/Users/mcwiz/Projects/unleashed && poetry run python "$script" --cwd "$project_path" "$@")
+  PATH="$_venv/Scripts:$PATH" PYTHONPATH="C:/Users/mcwiz/Projects/unleashed/src" "$_py" /c/Users/mcwiz/Projects/unleashed/"$script" --cwd "$project_path" "$@"
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-25.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
@@ -133,9 +138,15 @@ unleashed-alpha() {
 }
 
 # --- Gemini tier system ---
-# Prod: g-19 (triplet + 0.2s approval delay + 3 permission patterns)
+# Prod: g-20 (g-19 + console tab, per-repo logs, focus-back, tab-naming)
 unleashed-g() {
-  _unleashed_run src/unleashed-g-19.py "$@"
+  _unleashed_run src/unleashed-g-20.py "$@"
+}
+
+# --- Codex tier system ---
+# Prod: t-02 (t-01 + console tab, per-repo logs, focus-back)
+unleashed-t() {
+  _unleashed_run src/unleashed-t-02.py "$@"
 }
 
 # BATCH WORKFLOW - Run multiple issues unattended
