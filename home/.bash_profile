@@ -124,7 +124,7 @@ _unleashed_run() {
 }
 
 unleashed() {
-  _unleashed_run src/unleashed-c-27.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-28.py --sentinel-shadow --mirror --friction "$@"
 }
 
 unleashed-beta() {
@@ -133,7 +133,7 @@ unleashed-beta() {
 }
 
 unleashed-alpha() {
-  _unleashed_run src/unleashed-c-28.py --sentinel-shadow --mirror --friction "$@"
+  _unleashed_run src/unleashed-c-29.py --sentinel-shadow --mirror --friction "$@"
 }
 
 # --- Gemini tier system ---
