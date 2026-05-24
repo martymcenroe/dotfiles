@@ -43,8 +43,3 @@ alias llt='tree -a -L 2 -I .git'
 
 # Add pipx global tool bin path (managed by 'pipx ensurepath').
 export PATH="$PATH:$HOME/.local/bin"
-
-# User-Defined GitHub CLI Aliases
-# Persistent aliases for custom metrics and issue retrieval.
-alias gh-count='gh search commits --author martymcenroe --author-date ">=$(date -u +%Y-%m-%d)" | wc -l'
-alias gh-issue-list="gh issue list --json number,title,body --template '{{range .}}### Issue #{{.number}}: {{.title}}\n\nBody:\n---\n{{.body}}\n---\n\n\n{{end}}'"
